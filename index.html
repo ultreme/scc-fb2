@@ -145,8 +145,9 @@ var potz_num = Math.floor(Math.random() * 10 + 3);
 for (var i = 0; i < potz_num; ++i) {
     $("#le-chat").append("<li>" + filemoiunpotz() + ' ' + is_online() + "</li>");
 }
-
+$("#le-chat").hide();
 $("#oh-le-chat").click(function () {
+    $("#le-chat").toggle();
     return false;
 });
 </script>
