@@ -1,0 +1,125 @@
+<html>
+<head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js">
+</script>
+<script>
+function GetRandomCountry(){var country="";var countries=new Array("Afghanistan","Albania","Algeria","Andorra","Angola","Antarctica","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burma","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo, Democratic Republic","Congo, Republic of the","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","East Timor","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Greenland","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Korea, North","Korea, South","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Mongolia","Morocco","Monaco","Mozambique","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Samoa","San Marino"," Sao Tome","Saudi Arabia","Senegal","Serbia and Montenegro","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","Spain","Sri Lanka","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe");country=countries[Math.floor(Math.random()*countries.length)];return country}$(document).ready(function(){$("#random").click(function(){var rand_name=GetRandomCountry();var url="http://en.wikipedia.org/w/api.php?action=query&list=allimages&ailimit=30&format=json&aifrom="+rand_name+"&callback=?";console.log(url);$.getJSON(url,function(data){var rand_num=Math.floor(Math.random()*31);$("#rimg").html("<br> <img src= \""+data.query.allimages[rand_num].url+" \" />")})})});
+</script>
+<script language="javascript">
+var valeur=0;
+function modifier(increment) {
+valeur+=increment;
+document.getElementById('text').value=valeur;
+}
+</script>
+<style>
+h1 {
+div.flux{height:100%;width:100%;float:left;position:relative}
+img{float:left;max-width:100%;border:1px solid #021a40;margin-right:2cm;padding:1px}
+font-family: Verdana, sans-serif;
+line-height: 1em;
+color: #a1a9ff;
+font-weight:bold;
+font-style:italic;
+font-size: 111px;
+text-shadow:0px 0px 0 rgb(103,111,197),1px 1px 0 rgb(93,101,187),2px 2px 0 rgb(83,91,177),3px 3px 0 rgb(74,82,168),4px 4px 0 rgb(64,72,158),5px 5px 0 rgb(54,62,148),6px 6px 0 rgb(44,52,138),7px 7px 0 rgb(34,42,128),8px 8px 0 rgb(24,32,118),9px 9px 0 rgb(15,23,109),10px 10px 0 rgb(5,13,99),11px 11px 0 rgb(-5,3,89),12px 12px 0 rgb(-15,-7,79), 13px 13px 0 rgb(-25,-17,69),14px 14px 13px rgba(0,0,0,0),14px 14px 1px rgba(0,0,0,0.5),0px 0px 13px rgba(0,0,0,.2);}
+
+#jeu{
+display: none;}
+</style>
+</head>
+<body>
+<center>
+<h1>Facebook 2</h1>
+
+
+<form>
+<input type="radio" name="sex" value="male">Connecté<br>
+<input type="radio" name="sex" value="female">Déconnecté
+</form> 
+
+<textarea rows="4" cols="50">
+document texte en ligne
+</textarea>
+<br>
+
+<input type="button" value="enlever un ami" onClick="modifier(-1)"> 
+<input type="text" id="text" value="0" size="3" readonly="true" style="border:#FFFFFF none 0px; text-align:center; font-size:30px">
+<input type="button" value="ajouter un ami" onClick="modifier(1)">
+<br>
+<script language="javascript">
+document.getElementById('text').value=valeur;
+</script>
+
+
+<button onclick="notific()">Notification</button>
+
+<script>
+function notific() {
+    alert("Vous avez une notification !");
+}
+</script>
+
+
+<button onclick="myFunction()">Partager du contenu intéractif</button>
+<script>
+function myFunction() {
+    var x = document.createElement("INPUT");
+    x.setAttribute("type", "checkbox");
+    document.body.appendChild(x);
+}</script>
+
+<br><br>
+
+
+flux d'acutalité : 
+<br>
+<button id="random">Photos</button>
+    <div id="rimg"> </div>
+<br>
+
+<p>bouton j'aime :<input type="button" class="bouton" id="bou" onclick="grossir()" Value="J'aime">
+
+	<script type="text/javascript">
+	var taille = 1;
+
+	function grossir(){
+		taille++;
+		document.getElementById('bou').style.width = (50 * taille) + "px";
+		document.getElementById('bou').style.height = (20 * taille) + "px";
+		document.getElementById('bou').style.fontSize = (8 * taille) + "px";
+	}
+	</script>
+	</p>
+
+	
+<input type="button" onclick="jeux()" Value="Jeu">
+
+<div id="jeu">
+<br><form>
+<input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><br>
+<input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><br>
+<input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><br>
+<input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><br>
+</form><br>
+<input type="button" onclick="stopjeu()" Value="arrêter de jouer"> 
+</div>
+
+<script>
+
+function jeux() {
+	document.getElementById("jeu").style.display='block';
+	}
+
+function stopjeu() {
+document.getElementById("jeu").style.display='none';
+}
+</script>
+</center>
+
+
+
+
+
+</body>
+</html>
