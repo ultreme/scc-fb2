@@ -118,9 +118,38 @@ document.getElementById("jeu").style.display='none';
 </script>
 </center>
 
+<h2><a href="#" id="oh-le-chat">CHAT</a></h2>
+<ul id="le-chat">
+</ul>
 
+<script>
+var filemoiunpotz = function () {
+    var potz = ['Jean', 'Jacques', 'Georges', 'Michel', 'Marcel', 'Raymond', 'Robert', 'Regis', 'Eugene', 'Francois', 'Yves', 'Yvette', 'Gertrude', 'Brigitte', 'Micheline', 'Oui', 'Non', 'Un-Gomme', 'Gros', 'Phil', 'Phil Coupon', 'Gertrude', 'Philemon', 'Daniel', 'Esteban', 'David', 'Antoine', 'Diego', 'Junior', 'Gerard', 'Charles', 'Michael', 'Regis', 'Anakin', 'Renaud', 'Yannick', 'Sebastien', 'Manfred', 'Julien', 'Vadim', 'James', 'Louis', 'Gregoire', 'Vincent', 'Nicolas', 'Sarah', 'Jeanne', 'Daniel', 'Marie', 'Steve', 'Romain', 'Pierre', 'Coralie', 'Laurent', 'Esteban', 'Axel', 'Richard', 'Bob', 'Eude', 'Bastien', 'Yann', 'Edouard', 'Bobby', 'Christian', 'Nathan', 'Alex', 'Aline', 'Momo', 'Sylvain', 'Mohamed', 'Jackie', 'Michelle', 'Jacquie', 'Rodolphe', 'Auguste', 'Augustin', 'Hypolite', 'Gregory', 'Jacqueline', 'Rodrigo', 'Maurice', 'Rocco', 'Chang', 'Bruce', 'Nassim', 'Gwendal', 'Leo', 'Leonard', 'Enzo', 'Claire', 'Manon', 'Camille', 'Jonathan', 'Solvik', 'Gordon', 'Murdoch', 'Anakin', 'Kyle', 'Ken', 'Ryu', 'Agatha', 'Loana', 'Gaspard', 'Baltazar', 'Angus'];
+    var super_nom = "";
+    var max = Math.random() * 3;
+    for (var i = 0; i < max; ++i) {
+        super_nom += potz[Math.floor(Math.random() * potz.length)] + '-';
+    }
+    super_nom += potz[Math.floor(Math.random() * potz.length)];
+    return super_nom;
+}
 
+var is_online = function () {
+    if (Math.floor(Math.random() * 2) == 1) {
+	return "[<span style='color: #00FF00;'>là</span>]";
+    }
+    return "[<span style='color: #FF0000;'>paslà</span>]";
+}
 
+var potz_num = Math.floor(Math.random() * 10 + 3);
+for (var i = 0; i < potz_num; ++i) {
+    $("#le-chat").append("<li>" + filemoiunpotz() + ' ' + is_online() + "</li>");
+}
+
+$("#oh-le-chat").click(function () {
+    return false;
+});
+</script>
 
 </body>
 </html>
