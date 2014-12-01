@@ -27,6 +27,57 @@ text-shadow:0px 0px 0 rgb(103,111,197),1px 1px 0 rgb(93,101,187),2px 2px 0 rgb(8
 
 #jeu{
 display: none;}
+
+#boite-chat {
+    background-color: rgb(103,111,197);
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+#barduo {
+    padding: 2px;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+#pot-name {
+    margin: 0;
+    width: 350px;
+    float: left;
+}
+
+#bardubas {
+    position: absolute;
+    bottom: 0px;
+}
+
+#pot-parle {
+    width: 350px;
+    float: left;
+}
+
+#pot-go {
+    width: 50px;
+    position: absolute;
+    bottom: 0px;
+    float: right;
+}
+
+#bardubas {
+    clear: both;
+}
+
+#pot-conv {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.kan {
+    color: #303030;
+}
 </style>
 </head>
 <body>
@@ -122,6 +173,23 @@ document.getElementById("jeu").style.display='none';
 <ul id="le-chat">
 </ul>
 
+<div id="boite-chat">
+    <div id="barduo">
+    <h4 id="pot-name">marcel</h4>
+    <div id="kloz"><a href="#">[X]</a></div>
+    <div class="nettoyage" /></div>
+    </div>
+    <ul id="pot-conv">
+    <li><span class="kan">9:36</span> oui non non</li>
+    <li><span class="kan">9:36</span> oui non non</li>
+    </ul>
+    <div id="bardubas">
+       <input type="text" id="pot-parle" />
+       <input type="submit" id="pot-go" value="OK" />
+       <div class="nettoyage" />
+    </div>
+</div>
+
 <script>
 var filemoiunpotz = function () {
     var potz = ['Jean', 'Jacques', 'Georges', 'Michel', 'Marcel', 'Raymond', 'Robert', 'Regis', 'Eugene', 'Francois', 'Yves', 'Yvette', 'Gertrude', 'Brigitte', 'Micheline', 'Oui', 'Non', 'Un-Gomme', 'Gros', 'Phil', 'Phil Coupon', 'Gertrude', 'Philemon', 'Daniel', 'Esteban', 'David', 'Antoine', 'Diego', 'Junior', 'Gerard', 'Charles', 'Michael', 'Regis', 'Anakin', 'Renaud', 'Yannick', 'Sebastien', 'Manfred', 'Julien', 'Vadim', 'James', 'Louis', 'Gregoire', 'Vincent', 'Nicolas', 'Sarah', 'Jeanne', 'Daniel', 'Marie', 'Steve', 'Romain', 'Pierre', 'Coralie', 'Laurent', 'Esteban', 'Axel', 'Richard', 'Bob', 'Eude', 'Bastien', 'Yann', 'Edouard', 'Bobby', 'Christian', 'Nathan', 'Alex', 'Aline', 'Momo', 'Sylvain', 'Mohamed', 'Jackie', 'Michelle', 'Jacquie', 'Rodolphe', 'Auguste', 'Augustin', 'Hypolite', 'Gregory', 'Jacqueline', 'Rodrigo', 'Maurice', 'Rocco', 'Chang', 'Bruce', 'Nassim', 'Gwendal', 'Leo', 'Leonard', 'Enzo', 'Claire', 'Manon', 'Camille', 'Jonathan', 'Solvik', 'Gordon', 'Murdoch', 'Anakin', 'Kyle', 'Ken', 'Ryu', 'Agatha', 'Loana', 'Gaspard', 'Baltazar', 'Angus'];
@@ -131,7 +199,7 @@ var filemoiunpotz = function () {
         super_nom += potz[Math.floor(Math.random() * potz.length)] + '-';
     }
     super_nom += potz[Math.floor(Math.random() * potz.length)];
-    return super_nom;
+    return '<span class="name">' + super_nom + '</span>';
 }
 
 var is_online = function () {
@@ -143,12 +211,22 @@ var is_online = function () {
 
 var potz_num = Math.floor(Math.random() * 10 + 3);
 for (var i = 0; i < potz_num; ++i) {
-    $("#le-chat").append("<li>" + filemoiunpotz() + ' ' + is_online() + "</li>");
+    $("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
 }
 $("#le-chat").hide();
 $("#oh-le-chat").click(function () {
     $("#le-chat").toggle();
     return false;
+});
+$("#boite-chat").hide();
+
+$('.un-pot').click(function () {
+    $("#boite-chat").show();
+    $("#pot-name").html($(this).find(".name").html());
+});
+
+$("#kloz").click(function () {
+    $("#boite-chat").hide();
 });
 </script>
 
