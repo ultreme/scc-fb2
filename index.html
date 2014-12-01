@@ -37,14 +37,14 @@ display: none;}
 <form>
 <input type="radio" name="sex" value="male">Connecté<br>
 <input type="radio" name="sex" value="female">Déconnecté
-</form> 
+</form>
 
 <textarea rows="4" cols="50">
 document texte en ligne
 </textarea>
 <br>
 
-<input type="button" value="enlever un ami" onClick="modifier(-1)"> 
+<input type="button" value="enlever un ami" onClick="modifier(-1)">
 <input type="text" id="text" value="0" size="3" readonly="true" style="border:#FFFFFF none 0px; text-align:center; font-size:30px">
 <input type="button" value="ajouter un ami" onClick="modifier(1)">
 <br>
@@ -64,16 +64,30 @@ function notific() {
 
 <button onclick="myFunction()">Partager du contenu intéractif</button>
 <script>
-function myFunction() {
-    var x = document.createElement("INPUT");
-    x.setAttribute("type", "checkbox");
-    document.body.appendChild(x);
+  function myFunction() {
+  var random = Math.floor(Math.random() * 3);
+  switch (random) {
+    case 0:
+      var x = document.createElement("INPUT");
+      x.setAttribute("type", "checkbox");
+    break;
+    case 1:
+      var x = document.createElement("INPUT");
+      x.setAttribute("type", "radio");
+    break;
+    case 2:
+      var x = document.createElement("INPUT");
+      x.setAttribute("type", "button");
+      x.setAttribute("value", "x");
+    break;
+  }
+  document.body.appendChild(x);
 }</script>
 
 <br><br>
 
 
-flux d'acutalité : 
+flux d'acutalité :
 <br>
 <button id="random">Photos</button>
     <div id="rimg"> </div>
@@ -93,7 +107,7 @@ flux d'acutalité :
 	</script>
 	</p>
 
-	
+
 <input type="button" onclick="jeux()" Value="Jeu">
 
 <div id="jeu">
@@ -103,7 +117,7 @@ flux d'acutalité :
 <input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><br>
 <input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><input type="radio" name="g"><br>
 </form><br>
-<input type="button" onclick="stopjeu()" Value="arrêter de jouer"> 
+<input type="button" onclick="stopjeu()" Value="arrêter de jouer">
 </div>
 
 <script>
