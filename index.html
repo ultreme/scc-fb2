@@ -194,8 +194,6 @@ document.getElementById("jeu").style.display='none';
     <div class="nettoyage" /></div>
     </div>
     <ul id="pot-conv">
-    <li><span class="kan">9:36</span> oui non non</li>
-    <li><span class="kan">9:36</span> oui non non</li>
     </ul>
     <div id="bardubas">
        <input type="text" id="pot-parle" />
@@ -215,14 +213,12 @@ var filemoiunpotz = function () {
     super_nom += potz[Math.floor(Math.random() * potz.length)];
     return '<span class="name">' + super_nom + '</span>';
 }
-
 var is_online = function () {
     if (Math.floor(Math.random() * 2) == 1) {
 	return "[<span style='color: #00FF00;'>là</span>]";
     }
     return "[<span style='color: #FF0000;'>paslà</span>]";
 }
-
 var potz_num = Math.floor(Math.random() * 10 + 3);
 for (var i = 0; i < potz_num; ++i) {
     $("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
@@ -233,14 +229,87 @@ $("#oh-le-chat").click(function () {
     return false;
 });
 $("#boite-chat").hide();
-
 $('.un-pot').click(function () {
     $("#boite-chat").show();
     $("#pot-name").html($(this).find(".name").html());
 });
-
 $("#kloz").click(function () {
     $("#boite-chat").hide();
+});
+
+// ici, fais gaffe
+var markov_db = '';
+markov_db += "Peu m'importe que tu ne parles pas. Peu m'importe que tu n'aies pas de bras. Tu danses. Tu danses. Peu m'importe que tu ne saches pas rigoler. Et que tu ne puisses pas m'écouter. Près de toi je me sens bien. Près de toi je ne sens rien. La vie t'a fait comme tu es. Et comme tu es, tu es beau et. Tu danses. Tu danses. La vie t'a fait comme tu es. Et comme tu es, tu es beau et. Tu DANSES. Tu DANSES. Peu m'importe que tu manges de la boue. Et que tu ne puisses pas te tenir debout. Tu danses. Tu danses. Peu m'importe ta drôle de libido. Tu ne respires que sous l'eau. Près de toi je me sens bien. Près de toi je ne sens rien. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Peu m'importe que tu n'aies pas de dent. Quand tu danses tu ne prends pas d'élan. Oh non pas d'élan. Non non non. Non non non. Peu m'importe que tu sois tout mou. Je suis sûr qu'au fond tu es très fort car. Tu danses. Tu danses. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Gastéropode Invertébré. Escargot des mers";
+markov_db += "FULL HD. Full HD. FULL HD. FULL HD D D D D. FULL HD. FULLA FULA FULAAAA. Dans ma clé usb. J'ai une photo de toi. Elle pèse 2 méga. Mais dans mon cœur. Ca fait au moins du 30 giga. Et ça rentre même pas. Dans ma clé usb. J'ai une photo de toi. Elle pèse 2 méga. Mais dans mon cœur. Ca fait au moins du 30 giga. Et ça rentre même pas. Dans ma clé. USB. J'ai une photo de toi. Full HD. Full HD. Dans ma clé usb. J'ai une photo de toi. Elle pèse 2 méga. Mais dans mon cœur. Ca fait au moins du. 30 giga ça prend beaucoup de place. Mais ça veut pas dire que tu es grosse. C'est mon amour pour toi qui prend toute la place. Comme les disques durs qui saturent. Et c'est pour ça que j'ai fait la métaphore. Je t'aime en haute définition. Je t'aime en haute définition. FULL, H, D !. Dans ma clé usb. J'ai une photo de toi. Elle pèse 2 méga. Mais dans mon cœur. Ca fait au moins du 30 giga. Et ça rentre même pas ";
+markov_db += "Les hommes se nourrissent d'animaux sauvages qu'ils chassent et de fruits qu'ils cueillent. On les appelle les chasseurs-cueilleurs. Ils sont nomades et se déplacent en suivant les principaux troupeaux d'animaux. Mais a partir de 12000 av JC ils vont changer d’habitude. C’est la révolution néolithique. Elle a lieu dans une région que l'on appelle le Croissant fertile. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. CROISSANT CROISSANT FERTILE FERTILE. Les hommes vont alors cultiver des céréales. C'est l'apparition de l'agriculture vers 8 000 avant JC. Née dans le croissant fertile, cette révolution que l'on appelle néolithique, se diffuse en suivant les grandes voies de communication que sont la vallée du danube et les côtes de la méditerranée. Croissant Fertile Croissant Fertile Croissant Fertile Na na na na na naaa. En -3500, dans ce même lieu, naît l'écriture. Ainsi l'homme passe de la préhistoire à l'Histoire.";
+// todo: nourrir le bot avec plus de paroles
+
+var super_db = {};
+var phrases = markov_db.split(".");
+for (var phrase in phrases) {
+    var mots = phrases[phrase].split(" ");
+    var previous = '';
+    for (var mot in mots) {
+	if (previous.length > 0) {
+	    if (super_db[previous] == undefined) {
+		super_db[previous] = {};
+	    }
+	    if (super_db[previous][mots[mot]] == undefined) {
+		super_db[previous][mots[mot]] = 0;
+	    }
+	    super_db[previous][mots[mot]]++;
+	}
+	previous = mots[mot];
+    }
+}
+// ici, super_db contient pour chaque mot, les mots suivants possibles avec un coefficient de probabilité
+
+var repondstp = function (pot, text) {
+    var response_length = Math.floor(Math.random() * 15 + 1);
+    var mots = text.split(" ");
+    var current = '';
+
+    // choppe un mot connu de la super_db, sinon random
+    for (var i = mots.length; i > 0; --i) {
+	var mot = mots[i - 1];
+	if (super_db[mot] != undefined) {
+	    current = mot;
+	    break;
+	}
+    }
+
+    // moche
+    var reponse = '';
+    for (var i = 0; i < response_length; ++i) {
+	if (super_db[current] == undefined) {
+	    var ks = Object.keys(super_db);
+	    current = ks[Math.floor(ks.length * Math.random())];
+	    console.log(current);
+	}
+	var tmp = [];	
+	for (var j in super_db[current]) {
+	    for (var k = 0; k < super_db[current][j]; ++k) {
+		tmp.push(j);
+	    }
+	}
+	var mot = tmp[Math.floor(Math.random() * tmp.length)];
+	if (reponse.length != 0) {
+	    reponse += ' ';
+	}
+	reponse += mot;
+	current = mot;
+    }
+
+    return pot + ': ' + reponse + '.';
+}
+
+$("#pot-go").click(function () {
+    var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
+    var text = $("#pot-parle").val();
+    $("#pot-parle").val('');
+    $("#pot-conv").append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
+    var response = repondstp($("#pot-name").html(), text);
+    $("#pot-conv").append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
 });
 </script>
 
