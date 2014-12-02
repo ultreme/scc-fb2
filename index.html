@@ -11,10 +11,10 @@ var valeur=0;
 function modifier(increment) {
     valeur+=increment;
     document.getElementById('text').value=valeur;
-    if (valeur > 0) {
+    if (valeur != 0) {
 	$("#text").val(valeur + ' amis');
     } else {
-	$("#text").val('0 ami');
+	$("#text").val(valeur ' ami');
     }
     if (increment > 0) {
 	$("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
