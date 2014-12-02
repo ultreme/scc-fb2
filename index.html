@@ -9,8 +9,8 @@ function GetRandomCountry(){var country="";var countries=new Array("Afghanistan"
 <script language="javascript">
 var valeur=0;
 function modifier(increment) {
-valeur+=increment;
-document.getElementById('text').value=valeur;
+    valeur+=increment;
+    document.getElementById('text').value=valeur;
 }
 </script>
 <style>
@@ -74,9 +74,10 @@ display: none;}
     padding: 0px;
     margin: 0px;
     overflow: scroll;
-    height: 350px;
+    height: 330px;
+    width: 400px;
     position: absolute;
-    bottom: 0px;
+    top: 30px;
     right: 0px;
 }
 
@@ -104,6 +105,9 @@ document texte en ligne
 <input type="text" id="text" value="0" size="3" readonly="true" style="border:#FFFFFF none 0px; text-align:center; font-size:30px">
 <input type="button" value="ajouter un ami" onClick="modifier(1)">
 <br>
+
+    <span id="nombre_amis">
+    </span>
 <script language="javascript">
 document.getElementById('text').value=valeur;
 </script>
@@ -235,6 +239,7 @@ $("#oh-le-chat").click(function () {
 });
 $("#boite-chat").hide();
 $('.un-pot').click(function () {
+    $("#pot-conv").html("");
     $("#boite-chat").show();
     $("#pot-name").html($(this).find(".name").html());
 });
@@ -289,7 +294,6 @@ var repondstp = function (pot, text) {
 	if (super_db[current] == undefined) {
 	    var ks = Object.keys(super_db);
 	    current = ks[Math.floor(ks.length * Math.random())];
-	    console.log(current);
 	}
 	var tmp = [];	
 	for (var j in super_db[current]) {
@@ -309,12 +313,14 @@ var repondstp = function (pot, text) {
 }
 
 $("#pot-go").click(function () {
-    var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
     var text = $("#pot-parle").val();
-    $("#pot-parle").val('');
-    $("#pot-conv").append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
-    var response = repondstp($("#pot-name").html(), text);
-    $("#pot-conv").append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+    if (text.length > 0) {
+	var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
+	$("#pot-parle").val('');
+	$("#pot-conv").append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
+	var response = repondstp($("#pot-name").html(), text);
+	$("#pot-conv").append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+    }
 });
 </script>
 
