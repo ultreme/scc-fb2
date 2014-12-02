@@ -281,13 +281,15 @@ var super_db = {};
 var morceaux = split_phrase(markov_db);
 var previous = '';
 for (i in morceaux) {
-    if (super_db[previous] == undefined) {
-	super_db[previous] = {};
+    if (previous.length) {
+	if (super_db[previous] == undefined) {
+	    super_db[previous] = {};
+	}
+	if (super_db[previous][morceaux[i]] == undefined) {
+	    super_db[previous][morceaux[i]] = 0;
+	}
+	super_db[previous][morceaux[i]]++;
     }
-    if (super_db[previous][morceaux[i]] == undefined) {
-	super_db[previous][morceaux[i]] = 0;
-    }
-    super_db[previous][morceaux[i]]++;    
     previous = morceaux[i];
 }
 // ici, super_db contient pour chaque série de mots, les mots suivants possibles avec un coefficient de probabilité
@@ -308,9 +310,10 @@ var repondstp = function (pot, text) {
     // moche
     var reponse = '';
     for (var i = 0; i < response_length; ++i) {
+
 	if (super_db[current] == undefined) {
 	    var ks = Object.keys(super_db);
-	    current = ks[Math.floor(ks.length * Math.random())];
+            current = ks[Math.floor(ks.length * Math.random())];
 	}
 	var tmp = [];	
 	for (var j in super_db[current]) {
