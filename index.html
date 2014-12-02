@@ -11,6 +11,16 @@ var valeur=0;
 function modifier(increment) {
     valeur+=increment;
     document.getElementById('text').value=valeur;
+    if (valeur > 0) {
+	$("#text").val(valeur + ' amis');
+    } else {
+	$("#text").val('0 ami');
+    }
+    if (increment > 0) {
+	$("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
+    } else if (increment < 0) {
+	$(".un-pot").first().remove();
+    }
 }
 </script>
 <style>
@@ -102,15 +112,9 @@ document texte en ligne
 <br>
 
 <input type="button" value="enlever un ami" onClick="modifier(-1)">
-<input type="text" id="text" value="0" size="3" readonly="true" style="border:#FFFFFF none 0px; text-align:center; font-size:30px">
+<input type="text" id="text" value="0" size="6" readonly="true" style="border:#FFFFFF none 0px; text-align:center; font-size:30px">
 <input type="button" value="ajouter un ami" onClick="modifier(1)">
 <br>
-
-    <span id="nombre_amis">
-    </span>
-<script language="javascript">
-document.getElementById('text').value=valeur;
-</script>
 
 
 <button onclick="notific()">Notification</button>
@@ -228,7 +232,11 @@ var is_online = function () {
     }
     return "[<span style='color: #FF0000;'>paslà</span>]";
 }
+
 var potz_num = Math.floor(Math.random() * 10 + 3);
+valeur = potz_num;
+modifier(0);
+
 for (var i = 0; i < potz_num; ++i) {
     $("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
 }
