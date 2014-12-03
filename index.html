@@ -12,14 +12,14 @@ function modifier(increment) {
     valeur+=increment;
     document.getElementById('text').value=valeur;
     if (valeur != 0) {
-	$("#text").val(valeur + ' amis');
+        $("#text").val(valeur + ' amis');
     } else {
-	$("#text").val(valeur + ' ami');
+        $("#text").val(valeur + ' ami');
     }
     if (increment > 0) {
-	$("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
+        $("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
     } else if (increment < 0) {
-	$(".un-pot").first().remove();
+        $(".un-pot").first().remove();
     }
 }
 </script>
@@ -159,17 +159,17 @@ flux d'acutalité :
 
 <p>bouton j'aime :<input type="button" class="bouton" id="bou" onclick="grossir()" Value="J'aime">
 
-	<script type="text/javascript">
-	var taille = 1;
+        <script type="text/javascript">
+        var taille = 1;
 
-	function grossir(){
-		taille++;
-		document.getElementById('bou').style.width = (50 * taille) + "px";
-		document.getElementById('bou').style.height = (20 * taille) + "px";
-		document.getElementById('bou').style.fontSize = (8 * taille) + "px";
-	}
-	</script>
-	</p>
+        function grossir(){
+                taille++;
+                document.getElementById('bou').style.width = (50 * taille) + "px";
+                document.getElementById('bou').style.height = (20 * taille) + "px";
+                document.getElementById('bou').style.fontSize = (8 * taille) + "px";
+        }
+        </script>
+        </p>
 
 
 <input type="button" onclick="jeux()" Value="Jeu">
@@ -187,8 +187,8 @@ flux d'acutalité :
 <script>
 
 function jeux() {
-	document.getElementById("jeu").style.display='block';
-	}
+        document.getElementById("jeu").style.display='block';
+        }
 
 function stopjeu() {
 document.getElementById("jeu").style.display='none';
@@ -228,7 +228,7 @@ var filemoiunpotz = function () {
 }
 var is_online = function () {
     if (Math.floor(Math.random() * 2) == 1) {
-	return "[<span style='color: #00FF00;'>là</span>]";
+        return "[<span style='color: #00FF00;'>là</span>]";
     }
     return "[<span style='color: #FF0000;'>paslà</span>]";
 }
@@ -270,25 +270,25 @@ function split_phrase(input) {
     words = input.split(' ');
     res = [];
     for (i = 0; i < words.length; i += 2) {
-	if (words[i + 1] != undefined) {
-	    res.push(words[i] + ' ' + words[i + 1]);
-	}
+        if (words[i + 1] != undefined) {
+            res.push(words[i] + ' ' + words[i + 1]);
+        }
     }
     return res;
 }
-		    
+
 var super_db = {};
 var morceaux = split_phrase(markov_db);
 var previous = '';
 for (i in morceaux) {
     if (previous.length) {
-	if (super_db[previous] == undefined) {
-	    super_db[previous] = {};
-	}
-	if (super_db[previous][morceaux[i]] == undefined) {
-	    super_db[previous][morceaux[i]] = 0;
-	}
-	super_db[previous][morceaux[i]]++;
+        if (super_db[previous] == undefined) {
+            super_db[previous] = {};
+        }
+        if (super_db[previous][morceaux[i]] == undefined) {
+            super_db[previous][morceaux[i]] = 0;
+        }
+        super_db[previous][morceaux[i]]++;
     }
     previous = morceaux[i];
 }
@@ -300,33 +300,33 @@ var repondstp = function (pot, text) {
     var morceaux = split_phrase(text.toLowerCase());
 
     for (var i = morceaux.length; i > 0; --i) {
-	var morceau = morceaux[i - 1];
-	if (super_db[morceau] != undefined) {
-	    current = morceau;
-	    break;
-	}
+        var morceau = morceaux[i - 1];
+        if (super_db[morceau] != undefined) {
+            current = morceau;
+            break;
+        }
     }
-	
+
     // moche
     var reponse = '';
     for (var i = 0; i < response_length; ++i) {
 
-	if (super_db[current] == undefined) {
-	    var ks = Object.keys(super_db);
+        if (super_db[current] == undefined) {
+            var ks = Object.keys(super_db);
             current = ks[Math.floor(ks.length * Math.random())];
-	}
-	var tmp = [];	
-	for (var j in super_db[current]) {
-	    for (var k = 0; k < super_db[current][j]; ++k) {
-		tmp.push(j);
-	    }
-	}
-	var morceau = tmp[Math.floor(Math.random() * tmp.length)];
-	if (reponse.length != 0) {
-	    reponse += ' ';
-	}
-	reponse += morceau;
-	current = morceau;
+        }
+        var tmp = [];
+        for (var j in super_db[current]) {
+            for (var k = 0; k < super_db[current][j]; ++k) {
+                tmp.push(j);
+            }
+        }
+        var morceau = tmp[Math.floor(Math.random() * tmp.length)];
+        if (reponse.length != 0) {
+            reponse += ' ';
+        }
+        reponse += morceau;
+        current = morceau;
     }
 
     return pot + ': ' + reponse + '.';
@@ -335,11 +335,11 @@ var repondstp = function (pot, text) {
 var rrepond = function () {
     var text = $("#pot-parle").val();
     if (text.length > 0) {
-	var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
-	$("#pot-parle").val('');
-	$("#pot-conv").append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
-	var response = repondstp($("#pot-name").html(), text);
-	$("#pot-conv").append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+        var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
+        $("#pot-parle").val('');
+        $("#pot-conv").append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
+        var response = repondstp($("#pot-name").html(), text);
+        $("#pot-conv").append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
     }
 }
 
@@ -350,7 +350,7 @@ $("#pot-go").click(function () {
 
 $("#pot-parle").keyup(function (event) {
     if (event.keyCode == 13) {
-	rrepond();
+        rrepond();
     }
 });
 </script>
