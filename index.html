@@ -16,7 +16,7 @@ function modifier(increment) {
     } else {
         $("#text").val(valeur + ' ami');
     }
-    if (increment > 0) {
+    if (valeur > 0 && increment > 0) {
         $("#le-chat").append("<li class='un-pot'><a href='#'>" + filemoiunpotz() + ' ' + is_online() + "</a></li>");
     } else if (increment < 0) {
         $(".un-pot").first().remove();
