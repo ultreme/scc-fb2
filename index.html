@@ -336,10 +336,12 @@ var rrepond = function () {
     var text = $("#pot-parle").val();
     if (text.length > 0) {
         var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
+        var pot_conv = $("#pot-conv");
         $("#pot-parle").val('');
-        $("#pot-conv").append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
+        pot_conv.append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
         var response = repondstp($("#pot-name").html(), text);
-        $("#pot-conv").append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+        pot_conv.append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+        pot_conv.scrollTop(100000000); // c'est beaucoup
     }
 }
 
