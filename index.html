@@ -38,6 +38,12 @@ text-shadow:0px 0px 0 rgb(103,111,197),1px 1px 0 rgb(93,101,187),2px 2px 0 rgb(8
 #jeu{
 display: none;}
 
+.state-ecriving {
+    font-size: 70%;
+    color: white;
+    text-align: center;
+}
+
 #boite-chat {
     background-color: rgb(103,111,197);
     width: 400px;
@@ -338,10 +344,16 @@ var rrepond = function () {
         var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
         var pot_conv = $("#pot-conv");
         $("#pot-parle").val('');
-        pot_conv.append('<li><span class="kan">' + when + '</span>moi: ' + text + '</li>');
-        var response = repondstp($("#pot-name").html(), text);
-        pot_conv.append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
-        pot_conv.scrollTop(100000000); // c'est beaucoup
+        pot_conv.append('<li><span class="kan">' + when + '</span> moi: ' + text + '</li>');
+        setTimeout(function() {
+            pot_conv.append('<li class="state-ecriving">'+$("#pot-name").html()+' est en train d\'écrire...</li>')
+            setTimeout(function() {
+                $('.state-ecriving').remove();
+                var response = repondstp($("#pot-name").html(), text);
+                pot_conv.append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+                pot_conv.scrollTop(100000000); // c'est beaucoup
+            }, 1000);
+        }, 500);
     }
 }
 
