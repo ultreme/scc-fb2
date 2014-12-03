@@ -38,6 +38,10 @@ text-shadow:0px 0px 0 rgb(103,111,197),1px 1px 0 rgb(93,101,187),2px 2px 0 rgb(8
 #jeu{
 display: none;}
 
+.parleur {
+    color: orange;
+}
+
 .state-ecriving {
     font-size: 70%;
     color: white;
@@ -300,7 +304,7 @@ for (i in morceaux) {
 }
 // ici, super_db contient pour chaque série de mots, les mots suivants possibles avec un coefficient de probabilité
 
-var repondstp = function (pot, text) {
+var repondstp = function (text) {
     var response_length = Math.floor(Math.random() * 8 + 1);
     var current = '';
     var morceaux = split_phrase(text.toLowerCase());
@@ -335,7 +339,7 @@ var repondstp = function (pot, text) {
         current = morceau;
     }
 
-    return pot + ': ' + reponse + '.';
+    return reponse + '.';
 }
 
 var rrepond = function () {
@@ -344,16 +348,16 @@ var rrepond = function () {
         var when = Math.floor(Math.random() * 24) + ':' + Math.floor(Math.random() * 60);
         var pot_conv = $("#pot-conv");
         $("#pot-parle").val('');
-        pot_conv.append('<li><span class="kan">' + when + '</span> moi: ' + text + '</li>');
+        pot_conv.append('<li><span class="kan">' + when + '</span> <span class="parleur">moi:</span> ' + text + '</li>');
         setTimeout(function() {
             pot_conv.append('<li class="state-ecriving">'+$("#pot-name").html()+' est en train d\'écrire...</li>')
             setTimeout(function() {
                 $('.state-ecriving').remove();
-                var response = repondstp($("#pot-name").html(), text);
-                pot_conv.append('<li><span class="kan">' + when + '</span> ' + response + '</li>');
+                var response = repondstp(text);
+                pot_conv.append('<li><span class="kan">' + when + '</span> <span class="parleur">'+$("#pot-name").html()+':</span> ' + response + '</li>');
                 pot_conv.scrollTop(100000000); // c'est beaucoup
-            }, 1000);
-        }, 500);
+            }, Math.floor(Math.random() * 600) + 500);
+        }, Math.floor(Math.random() * 400) + 100);
     }
 }
 
